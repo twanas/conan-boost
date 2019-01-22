@@ -7,7 +7,7 @@
 using namespace boost::asio;
 
 void print_threadid() {
-    std::cout << std::this_thread::get_id() << '\n';
+    std::cout << std::this_thread::get_id() << std::endl;
 }
 
 int main() {
@@ -17,9 +17,16 @@ int main() {
   io_service ioservice;
 
   steady_timer timer{ioservice, std::chrono::seconds{3}};
+
   timer.async_wait([](const boost::system::error_code &ec)
     {print_threadid();}
   );
+
+  timer.wait();
+
+  print_threadid();
+
+  // passes control to operating system functions that manage boost ASIO
   ioservice.run();
 }
 
