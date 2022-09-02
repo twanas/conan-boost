@@ -8,7 +8,7 @@ This repository can be used as a base project for all c++ development requiring 
 
 ```
 mkdir build && cd build
-conan install ..
+conan install --build=boost ..
 cmake .. -G "Unix Makefiles"
 cmake --build .
 ```
